@@ -71,6 +71,9 @@ def wrott2(L_i,wr2,weq):
 
 def fsevol(evol,A_k):
     # spot growth or decay - power law (4th paragraph in Sect. 2 of S15)
+	if A_K<=0:
+		return 0
+	else:
 	dA=np.exp(evol[0])*A_k**evol[1]
 	return dA
 
