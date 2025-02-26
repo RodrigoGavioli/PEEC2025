@@ -76,9 +76,9 @@ limb_D=[0.5287,0.2175]                    # limb darkening -- Eq. 6 in S17 -- so
 # slicing the spot in surface elements
 # in the spot's referential -- latitude varying from 0-R_spot -- longitude varying from 0-360
 # Fig. 6.2 in the Thesis and nearby equations
-nbeta=30                                  # number of elements in longitude 
+nbeta=30                                # number of elements in longitude
 ntheta=30                                 # number of elements in latitude
-# This choise of elements leads to an overestimating of the flux deficit of about 5% in relation
+# This choice of elements leads to an overestimating of the flux deficit of about 5% in relation
 # to the reference (Notebook around 14/04/2022), which I considered to be reasonable. Note that
 # while comparing artificial data, this parameters MUST be unchanged as they change the relative
 # flux decrease.
