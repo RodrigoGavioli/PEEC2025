@@ -69,13 +69,10 @@ def wrott2(L_i,wr2,weq):
 	wrot=weq*(1.-wr2*np.sin(np.radians(L_i))**2)
 	return wrot
 
-def fsevol(evol, A_k):
-    # Evita calcular potência de valores negativos ou zero
-    if A_k <= 0:
-        return 0
-    dA = np.exp(evol[0]) * A_k**evol[1]
-    return dA
-
+def fsevol(evol,A_k):
+    # spot growth or decay - power law (4th paragraph in Sect. 2 of S15)
+	dA=np.exp(evol[0])*A_k**evol[1]
+	return dA
 
 def spotevol(Amax,Lfd,aevol,cad,dh):
 	# spot evolution [days] - meaning it needs to be "normalized" becayse the power law are define based on daily data
