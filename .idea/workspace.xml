@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e7874ef4-f8d3-43d2-b004-2b04715912a7" name="Changes" comment="Added the complete code and a first simulation, relative to the visible side and backside, respectively v_side and b_side">
+    <list default="true" id="e7874ef4-f8d3-43d2-b004-2b04715912a7" name="Changes" comment="Corrected the problem with negative number at function &quot;fsevol&quot; at line 72">
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PEEC2025/functions_and_count.py" beforeDir="false" afterPath="$PROJECT_DIR$/PEEC2025/functions_and_count.py" afterDir="false" />
@@ -121,12 +121,21 @@
       <option name="project" value="LOCAL" />
       <updated>1740505760639</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Corrected the problem with negative number at function &quot;fsevol&quot; at line 72">
+      <option name="closed" value="true" />
+      <created>1740590398647</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1740590398647</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added the first code &quot;functions_and_count&quot; complete" />
     <MESSAGE value="Added the complete code and a first simulation, relative to the visible side and backside, respectively v_side and b_side" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the complete code and a first simulation, relative to the visible side and backside, respectively v_side and b_side" />
+    <MESSAGE value="Corrected the problem with negative number at function &quot;fsevol&quot; at line 72" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected the problem with negative number at function &quot;fsevol&quot; at line 72" />
   </component>
 </project>
