@@ -18,8 +18,8 @@
 
 import numpy as np
 import matplotlib.pyplot as pl
-from main_dflux import *
-from functions_and_count import *
+from Initial_Data.main_dflux import *
+from Initial_Data.functions_and_count import *
 
 #--------------------------------parameters--------------------------------------#
 plot_vis=1                                # plot visualization: if 1, the summary figure is produced - visible side
