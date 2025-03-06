@@ -65,6 +65,7 @@ C_GW=[5.,6.3e-3]                                              # correction to th
 # to the Eq. 8 in Santos et al. 2017.
 # in order: alpha (shear); P_eq (rotation period at the equator in days) 
 wrot=[0.2,25.] 
+#Buscar no segundo artigo
 
 # parameters for the flux computation
 Rsun=6.955e10                             # solar radius [cgs]
