@@ -1,0 +1,38 @@
+
+
+from astropy.io import fits
+import star_privateer as sp
+
+
+# Abrir o arquivo FITS
+filename = "/home/rodrigogavioli/meu_ambiente/lib/python3.12/site-packages/star_privateer/timeseries/003733735.fits"
+hdul = fits.open(filename)
+
+# Acessar os dados da extensão PRIMARY
+data = hdul[0].data  # Isso é um numpy.ndarray com shape (2, 71964)
+
+# Verificar o formato dos dados
+print("Formato dos dados:", data.shape)
+
+
+t = data[0]  # Primeira linha: tempo
+s = data[1]  # Segunda linha: fluxo de luz
+
+print("Primeiros tempos:", t[:5])
+print("Primeiros fluxos:", s[:5])
+
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8,5))
+plt.plot(t, s, marker='o', linestyle='-', markersize=2)
+plt.xlabel("Tempo (dias)")
+plt.ylabel("Fluxo da Estrela")
+plt.title("Curva de Luz da Estrela 003733735")
+plt.show()
+
+
+with open("/home/rodrigogavioli/PEEC2025/dflux_inc70.0.npy", "rb") as f:
+    raw_data = f.read(100)  # Ler os primeiros 100 bytes
+print(raw_data)  # Isso nos dá uma ideia se o arquivo está correto
+
