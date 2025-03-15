@@ -44,7 +44,7 @@ nspot=[0.26/10/cad,tmin-1.,Pcycle*0.4,-0.3]
 
 # MAXIMUM AREA: lognormal distribution
 # in order: mu; sigma
-logn_area=[2.,1.]
+logn_area=[4.,1.]
 
 # SPOT EVOLUTION - spot varying size: power law (4th paragraph in Sect. 2 of S15)
 # in order: amplitude; exponent

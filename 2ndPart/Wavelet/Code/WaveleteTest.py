@@ -2,13 +2,19 @@ import numpy as np
 import star_privateer as sp
 import matplotlib.pyplot as plt
 import os
-filename = sp.get_target_filename (sp.timeseries,"003733735")
+from Saving import *
+import pandas as pd
+
+filename = sp.get_target_filename (sp.timeseries,"dfluxfilteredInitialData")
 t, s, dt = sp.load_resource (filename)
+folder = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Graphs"
+graphname = "InitialData"
+
 
 dt *= 4
 t = t[:(len(t) // 4) * 4] #Alterado
 t = np.mean(t.reshape(-1, 4), axis=1)
-#t = t*365.25
+t = t*365.25
 s = s[:(len(s) // 4) * 4] #Alterado
 s = np.mean (s.reshape (-1,4), axis=1)
 
@@ -20,6 +26,7 @@ s = np.mean (s.reshape (-1,4), axis=1)
 for i in range(len(features)):
     print(f"{feature_names[i]}: {features[i]}")
 
+saving_graphs(folder, graphname)
 
 dt = (t[1]-t[0])*86400
 (periods, wps, gwps,
@@ -38,6 +45,7 @@ fig = sp.plot_wps(t-t[0], periods, wps, gwps, coi=coi,
                      figsize=(8,4), ylim=(1, 100), show_contour=False,
                      param_gauss=param_gauss)
 
+saving_graphs(folder, graphname)
 
 
 
@@ -62,14 +70,30 @@ fig = sp.plot_wps(t-t[0], periods, wps, gwps,
                   param_gauss=param_gauss)
 
 
-
-graph_name = f"teste{len(os.listdir("/home/rodrigogavioli/PEEC2025/Star-Privateer/Testing/Wavelet/Graphs")) + 1}.png"
-output_path = os.path.join("/home/rodrigogavioli/PEEC2025/Star-Privateer/Testing/Wavelet/Graphs", graph_name)
-
-
-#plt.savefig(output_path, dpi=300, bbox_inches='tight')
+saving_graphs(folder, graphname)
 
 plt.show()
-plt.close("all")
 
+Pps = features[0]
+Pacf = features[1]
+Pcs = features[2]
+
+erroPps = features[3]
+erroPacf = features[4]
+erroPcs = features[5]
+
+df = pd.DataFrame({
+    "Simulação": [graphname]* 3,
+    "Períodos" : ["P_PS", "P_ACF", "P_CS"],
+    "Valor": [Pps, Pacf, Pcs],
+    "Incerteza": [erroPps, erroPacf, erroPcs]
+})
+
+print(df)
+
+table_path = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Graphs/tabela_periodos.csv"
+
+df.to_csv(table_path, mode="a", header=not os.path.exists(table_path), index=False)
+
+print("Tabela salva em ", table_path)
 
