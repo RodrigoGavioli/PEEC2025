@@ -49,7 +49,7 @@ logn_area=[4.,1.]
 # SPOT EVOLUTION - spot varying size: power law (4th paragraph in Sect. 2 of S15)
 # in order: amplitude; exponent
 # for simplification: equal growth and decay rates
-area_evol=[0.17,0.47]
+area_evol=[0.5,0.47]
 
 # MEAN LATITUDE: exponential (Eq. 3 in S15)
 # in order: imitial latitude; initial time; scale related to Pcycle

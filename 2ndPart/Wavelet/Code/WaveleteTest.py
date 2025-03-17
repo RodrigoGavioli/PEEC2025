@@ -5,13 +5,18 @@ import os
 from Saving import *
 import pandas as pd
 
-filename = sp.get_target_filename (sp.timeseries,"dfluxfilteredInitialData")
-t, s, dt = sp.load_resource (filename)
+#filename = sp.get_target_filename(sp.timeseries, "003733735")
+#t, s, dt = sp.load_resource (filename)
+
+filename ="/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAreaEvolE03.npy"
+arquivo = np.load(filename)
+t = arquivo[:,0]
+s = arquivo[:,1]
 folder = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Graphs"
-graphname = "InitialData"
+graphname = "AreaEvolExponent=0.3"
+ 
 
-
-dt *= 4
+#dt *= 4
 t = t[:(len(t) // 4) * 4] #Alterado
 t = np.mean(t.reshape(-1, 4), axis=1)
 t = t*365.25
@@ -72,15 +77,14 @@ fig = sp.plot_wps(t-t[0], periods, wps, gwps,
 
 saving_graphs(folder, graphname)
 
-plt.show()
 
 Pps = features[0]
 Pacf = features[1]
 Pcs = features[2]
 
 erroPps = features[3]
-erroPacf = features[4]
-erroPcs = features[5]
+erroPacf = features[5]
+erroPcs = features[7]
 
 df = pd.DataFrame({
     "Simulação": [graphname]* 3,
@@ -97,3 +101,4 @@ df.to_csv(table_path, mode="a", header=not os.path.exists(table_path), index=Fal
 
 print("Tabela salva em ", table_path)
 
+#plt.show()
