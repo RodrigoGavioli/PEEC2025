@@ -89,6 +89,9 @@ ntheta=30                                 # number of elements in latitude
 #-------------------------------------------------------------------------------#
 #-------------------------------------------------------------------------------#
 
+
+
+
 # main code for the light curve generation
 dflux=dflux(Pcycle,tstep,tmin,overlap_c,nspot,logn_area,muL,sigmaL,D_GW,C_GW,wrot,area_evol,\
 	tspan,cad,Amin,Rsun,inc,Io,Cs,limb_D,nbeta,ntheta)

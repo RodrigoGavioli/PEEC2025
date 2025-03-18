@@ -8,12 +8,13 @@ import pandas as pd
 #filename = sp.get_target_filename(sp.timeseries, "003733735")
 #t, s, dt = sp.load_resource (filename)
 
-filename ="/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAreaEvolE03.npy"
+filename ="/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAlpha02_5.npy"
 arquivo = np.load(filename)
 t = arquivo[:,0]
 s = arquivo[:,1]
 folder = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Graphs"
-graphname = "AreaEvolExponent=0.3"
+foldertable = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/tables"
+graphname = "alpha0.25"
  
 
 #dt *= 4
@@ -50,7 +51,7 @@ fig = sp.plot_wps(t-t[0], periods, wps, gwps, coi=coi,
                      figsize=(8,4), ylim=(1, 100), show_contour=False,
                      param_gauss=param_gauss)
 
-saving_graphs(folder, graphname)
+#saving_graphs(folder, graphname)
 
 
 
@@ -75,7 +76,7 @@ fig = sp.plot_wps(t-t[0], periods, wps, gwps,
                   param_gauss=param_gauss)
 
 
-saving_graphs(folder, graphname)
+#saving_graphs(folder, graphname)
 
 
 Pps = features[0]
@@ -87,15 +88,18 @@ erroPacf = features[5]
 erroPcs = features[7]
 
 df = pd.DataFrame({
-    "Simulação": [graphname]* 3,
-    "Períodos" : ["P_PS", "P_ACF", "P_CS"],
-    "Valor": [Pps, Pacf, Pcs],
-    "Incerteza": [erroPps, erroPacf, erroPcs]
-})
+    "Simulação": [graphname],
+    "P_PS": [Pps],  
+    "Incerteza_P_PS": [erroPps],
+    "P_ACF": [Pacf],
+    "Incerteza_P_ACF": [erroPacf],
+    "P_CS": [Pcs],
+    "Incerteza_P_CS": [erroPcs]
+    })
 
 print(df)
 
-table_path = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Graphs/tabela_periodos.csv"
+table_path = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/tables/alpha0.2.csv"
 
 df.to_csv(table_path, mode="a", header=not os.path.exists(table_path), index=False)
 

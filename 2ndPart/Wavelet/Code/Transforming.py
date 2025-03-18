@@ -5,18 +5,19 @@ import scipy.ndimage as scipy
 import pandas as pd
 import matplotlib.pyplot as pl
 
-dflux = np.load("/home/rodrigogavioli/PEEC2025/1stPart/SimulationsAreaevolWrot/AreaEvolE030/dflux_inc70.0.npy")
-time = dflux[:,0]
+dflux = np.load("/home/rodrigogavioli/PEEC2025/dfluxAlpha02/dflux_inc70.05.npy")
+
+time = dflux[:,0]*365.25
 flux = dflux[:,1]
 pl.plot(time, flux)
 
 
-mediamovel = scipy.uniform_filter1d(flux, size=50)
+mediamovel = scipy.uniform_filter1d(flux, size=500)
 flux = flux - mediamovel
 dflux[:,1] = flux
 pl.plot(time, flux)
-np.save("/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAreaEvolE03", dflux)
-
+np.save("/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAlpha02_5", dflux)
+pl.plot(time,mediamovel)
 pl.xlabel("Tempo (dias)")
 pl.ylabel("Fluxo normalizado")
 pl.title("Curva de Luz - Comparação Original vs Filtrada")
@@ -27,7 +28,7 @@ pl.grid()
 
 #--------------------------------------------------------------------------------#
 """
-dflux_data = np.load("/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAlpha005.npy")
+dflux_data = np.load("/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAreaEvolE03.npy")
 
 hdu = fits.PrimaryHDU(dflux_data)
 hdul = fits.HDUList([hdu])
@@ -46,7 +47,7 @@ flux_fits = dflux_fits[:, 1]
 
 
 pl.plot(time, flux, label="Fluxo Filtrado Original", color="blue", alpha=0.5)
-pl.plot(time_fits, flux_fits, label="Fluxo do FITS", color="red", linestyle="dashed")
+pl.plot(time_fits, flux_fits, label="Fluxo do FITS", color="red")
 pl.xlabel("Tempo (dias)")
 pl.ylabel("Fluxo Normalizado")
 pl.title("Curva de Luz - Comparação Original vs FITS")
