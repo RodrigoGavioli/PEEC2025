@@ -202,7 +202,7 @@ def tbstar(theta_spot,betha_spot,lat_spot):
 def plot_simul(tmin,tstep,tspan,Nxlim):
 	# ploting the summary figure for the spot simulation
 
-	vside=np.loadtxt('vside.txt')
+	vside=np.loadtxt(f'/home/rodrigogavioli/PEEC2025/NightSimulations/vside{timestamp}.txt')
 	
 	# counts the total number of spots and total spot area
 	nasp=nasp_count(vside,tmin,tstep,tspan)

@@ -5,9 +5,9 @@ import scipy.ndimage as scipy
 import pandas as pd
 import matplotlib.pyplot as pl
 
-dflux = np.load("/home/rodrigogavioli/PEEC2025/dfluxAlpha02/dflux_inc70.05.npy")
+dflux = np.load("/home/rodrigogavioli/PEEC2025/wrot-5.0/dflux_inc_70.0_20032025-121330.npy")
 
-time = dflux[:,0]*365.25
+time = dflux[:,0]
 flux = dflux[:,1]
 pl.plot(time, flux)
 
@@ -16,14 +16,14 @@ mediamovel = scipy.uniform_filter1d(flux, size=500)
 flux = flux - mediamovel
 dflux[:,1] = flux
 pl.plot(time, flux)
-np.save("/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/DfluxfilteredAlpha02_5", dflux)
+np.save("/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Dfluxfiltered/Dfluxfilteredteste2", dflux)
 pl.plot(time,mediamovel)
 pl.xlabel("Tempo (dias)")
 pl.ylabel("Fluxo normalizado")
 pl.title("Curva de Luz - Comparação Original vs Filtrada")
 pl.legend(["Original", "Filtrada"])
 pl.grid()
-#pl.show()
+pl.show()
 
 
 #--------------------------------------------------------------------------------#

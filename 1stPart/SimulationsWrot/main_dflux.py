@@ -2,7 +2,9 @@ import math
 import numpy as np
 from functions_and_count import *
 from main_spot_simul import *
+import time
 
+timestamp = time.strftime("%Y%m%d-%H%M%S")#Alterado
 #-------------------------------------------------------------------------------#
 # main program for the Delta_flux computation                                   #
 #-------------------------------------------------------------------------------#
@@ -14,8 +16,8 @@ def dflux(Pcycle,tstep,tmin,overlap_c,nspot,logn_area,muL,sigmaL,D_GW,C_GW,wrot,
 
 	# Output files: vside - visible side; bside - both sides - the output is ordered by spot ID number
 	# 1. txt as it is lighter than cvs 2. as it has many columns a header is useful, hence not opting for npy
-	vsidef=open('vside.txt','w')
-	bsidef=open('bside.txt','w')
+	vsidef=open(f'/home/rodrigogavioli/PEEC2025/NightSimulations/vside{timestamp}.txt','w')
+	bsidef=open(f'/home/rodrigogavioli/PEEC2025/NightSimulations/bside{timestamp}.txt','w')
 	vsidef.write('# spot data: visible/near side\n')
 	vsidef.write('# time, Latitude, Area, Lifetime, Longitude, Longitude step, spot ID number, maximum Area\n')
 	bsidef.write('# spot data: both sides - near and far side\n')
@@ -28,7 +30,7 @@ def dflux(Pcycle,tstep,tmin,overlap_c,nspot,logn_area,muL,sigmaL,D_GW,C_GW,wrot,
 	bsidef.close()
 
 	# spot data - both sides: near and far side
-	bside=np.loadtxt('bside.txt')
+	bside=np.loadtxt(f'/home/rodrigogavioli/PEEC2025/NightSimulations/bside{timestamp}.txt')
 
 	# sorting according to time, instead of spot ID
 	indx=sorted(range(len(bside[:,0])), key=lambda k: bside[k,0])
@@ -81,6 +83,7 @@ def dflux(Pcycle,tstep,tmin,overlap_c,nspot,logn_area,muL,sigmaL,D_GW,C_GW,wrot,
 		dflux[t,:]=np.array((time[t],dfs))
 
 	# here I chose npy, only two columns and it is lighter than txt or cvs
-	np.save('dflux_inc'+str(inc)+'.npy',dflux)
 	
+	
+	np.save(f'/home/rodrigogavioli/PEEC2025/NightSimulations/dflux_inc{inc}_{timestamp}.npy', dflux)
 	return dflux

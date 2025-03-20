@@ -25,7 +25,7 @@ from functions_and_count import *
 plot_vis=1                                # plot visualization: if 1, the summary figure is produced - visible side
 Nxlim=100.                                # minimum count to set the xlim of the area distribution
 
-Pcycle=11.                                # cycle period [years]
+Pcycle=2.                                # cycle period [years]
 tstep=4.                                  # time step [hours]
 tmin=0           
                          # initial time [years]
