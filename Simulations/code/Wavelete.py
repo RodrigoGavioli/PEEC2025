@@ -5,22 +5,30 @@ import os
 #from Saving import *
 import pandas as pd
 import scipy.ndimage as scipy
+import os
 
+
+Alpha = -4.9
 
 while Alpha <= 5:
+    print(Alpha)
     for i in range(20):
-        filename =f"/home/rodrigogavioli/PEEC2025/Simulations/Wrot/Alpha-5.0/dflux_inc_70.0_{i}.npy"
+        filename =f"/home/rodrigogavioli/PEEC2025/Simulations/Wrot/Alpha{Alpha}/dflux_inc_70.0_{i}.npy"
         arquivo = np.load(filename)
         s = arquivo[:,1]
-        filter = scipy.uniform_filter1d(s, size=500)
-        s = s - filter 
+        smooth = scipy.uniform_filter1d(s, size=500)
+        s = s - smooth
         arquivo[:,1] = s
         s = arquivo[:,1]
         t = arquivo[:,0]
 
-        folder = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/Graphs"
-        foldertable = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/tables"
-        graphname = ""
+
+        foldergraph = f"/home/rodrigogavioli/PEEC2025/Simulations/graphs/graphAlpha={Alpha}"
+        os.makedirs(foldergraph, exist_ok=True)
+        foldertable = "/home/rodrigogavioli/PEEC2025/Simulations/table"
+        graphname = f"Alpha={Alpha}"
+        table_path = f"/home/rodrigogavioli/PEEC2025/Simulations/table/Alpha{Alpha}.csv"
+
 
 
         #dt *= 4
@@ -32,11 +40,9 @@ while Alpha <= 5:
 
         (p_wps, p_acf, gwps, wps, acf,
         cs, coi, features, feature_names, _) = sp.analysis_pipeline (t, s, figsize=(8,12),
-                                                                    wavelet_analysis=True, plot=True,
+                                                                    wavelet_analysis=True, plot=False,
                                                                     xlim=(0,50), normscale='log', ylogscale=True,
                                                                     add_periodogram=True)
-        for i in range(len(features)):
-            print(f"{feature_names[i]}: {features[i]}")
 
         #saving_graphs(folder, graphname)
 
@@ -47,7 +53,7 @@ while Alpha <= 5:
         (prot_ps, E_prot_ps,
         param_gauss) = sp.compute_prot_err_gaussian_fit (periods, gwps, n_profile=5,
                                                             threshold=0.1)
-        print("Erro Gwps", E_prot_ps)
+        
 
 
         fig = sp.plot_wps(t-t[0], periods, wps, gwps, coi=coi,
@@ -56,7 +62,7 @@ while Alpha <= 5:
                             vmin=None, vmax=None, filename=None, dpi=300,
                             figsize=(8,4), ylim=(1, 100), show_contour=False,
                             param_gauss=param_gauss)
-
+        plt.close(fig)
         #saving_graphs(folder, graphname)
 
 
@@ -70,7 +76,7 @@ while Alpha <= 5:
         param_gauss) = sp.compute_prot_err_gaussian_fit (periods, gwps, n_profile=5,
                                                         threshold=0.1)
 
-        print("Erro Gwps2", E_prot_ps)
+        
 
 
 
@@ -81,7 +87,7 @@ while Alpha <= 5:
                         figsize=(8,4), ylim=(1, 100), show_contour=False,
                         param_gauss=param_gauss)
 
-
+        plt.close(fig)
         #saving_graphs(folder, graphname)
 
 
@@ -103,13 +109,14 @@ while Alpha <= 5:
             "Incerteza_P_CS": [erroPcs]
             })
 
-        print(df)
-
-        table_path = "/home/rodrigogavioli/PEEC2025/2ndPart/Wavelet/tables/alpha0.2.csv"
+       
 
         df.to_csv(table_path, mode="a", header=not os.path.exists(table_path), index=False)
 
-        print("Tabela salva em ", table_path)
-    
+        print(f"Tabela da simulação {i+1} de 20 salva em ", table_path)
+        plt.close()
 
         #plt.show()
+    Alpha += 0.1
+
+    Alpha = round(Alpha,1)
