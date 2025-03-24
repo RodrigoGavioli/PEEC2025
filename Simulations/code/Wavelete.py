@@ -7,12 +7,12 @@ import pandas as pd
 import scipy.ndimage as scipy
 import os
 
-
-Alpha = -4.9
+Nruns = 20
+Alpha = 2.0
 
 while Alpha <= 5:
     print(Alpha)
-    for i in range(20):
+    for i in range(Nruns):
         filename =f"/home/rodrigogavioli/PEEC2025/Simulations/Wrot/Alpha{Alpha}/dflux_inc_70.0_{i}.npy"
         arquivo = np.load(filename)
         s = arquivo[:,1]
@@ -21,7 +21,7 @@ while Alpha <= 5:
         arquivo[:,1] = s
         s = arquivo[:,1]
         t = arquivo[:,0]
-
+        
 
         foldergraph = f"/home/rodrigogavioli/PEEC2025/Simulations/graphs/graphAlpha={Alpha}"
         os.makedirs(foldergraph, exist_ok=True)
@@ -114,9 +114,10 @@ while Alpha <= 5:
         df.to_csv(table_path, mode="a", header=not os.path.exists(table_path), index=False)
 
         print(f"Tabela da simulação {i+1} de 20 salva em ", table_path)
-        plt.close()
+        
 
         #plt.show()
-    Alpha += 0.1
+        #plt.close("all")
+    Alpha += 1.0
 
     Alpha = round(Alpha,1)

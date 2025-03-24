@@ -6,7 +6,7 @@ import tqdm
 from main_dfluxAutoSimul import dflux
 
 Nruns = 20
-Alpha = -5
+Alpha = 2
 
 
 
@@ -53,7 +53,7 @@ while Alpha <= 5:
             os.rename("bside.txt", os.path.join(file, f"bside_{i}.txt"))
 
    
-   Alpha += 0.1 #start alter the alpha
+   Alpha += 1.0 #start alter the alpha
    Alpha = round(Alpha, 1) #round for naming directorys effects
 
 
